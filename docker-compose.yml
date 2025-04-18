@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:8080"
+      - "8025:8025"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - server_uno
+      - server_due
+
+  server_uno:
+    build:
+      context: ./server
+    container_name: server_uno
+    command: python server_uno.py
+
+  server_due:
+    build:
+      context: ./server
+    container_name: server_due
+    command: python server_due.py
+
+  client:
+    build:
+      context: ./client
+    container_name: client
+    depends_on:
+      - nginx
