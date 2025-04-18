@@ -8,14 +8,14 @@ def handle_client(conn, addr,i):
     data = conn.recv(1024)  # Ricevi dati dal client
     if data:
         print(f"S: Ricevuto dal client: {data.decode('utf-8')}")
-        conn.sendall(b"S: Messaggio ricevuto, sono il server 1 in ascolto su 8080!")
+        conn.sendall(b"S: Messaggio ricevuto, sono il server 1 in ascolto su 8001!")
     print(f"S: Client totali connessi sulla porta 8080: {i}")
     conn.close()
 
 
 
 server = socket.socket()
-server.bind(("0.0.0.0",8080))
+server.bind(("0.0.0.0",8001))
 server.listen()
 print("S: In attesa di connessioni...")
 i=0
